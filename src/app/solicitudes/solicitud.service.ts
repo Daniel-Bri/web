@@ -54,6 +54,7 @@ export interface SolicitudDisponible {
   created_at: string;
   es_sos: boolean;
   distancia_km: number | null;   // §4.6 Motor IA
+  eta_estimado_min: number | null;
   score_ia: number;              // §4.6 Relevancia Yango-like
 }
 
