@@ -94,7 +94,7 @@ export class DashboardHomeComponent {
   get quickLinks(): QuickLink[] {
     const all: Record<string, QuickLink[]> = {
       cliente: [
-        { icon: 'warning_amber',    label: 'Reportar Emergencia', route: '/app/emergencias/adjuntar-fotos',                   bg: '#FEF2F2', color: '#EF4444' },
+        { icon: 'warning_amber',    label: 'Reportar Emergencia', route: '/app/emergencias/reportar-emergencia',              bg: '#FEF2F2', color: '#EF4444' },
         { icon: 'directions_car',   label: 'Mis Vehículos',       route: '/app/acceso-registro/gestionar-vehiculos',           bg: '#EFF6FF', color: '#2563EB' },
         { icon: 'track_changes',    label: 'Mis Solicitudes',      route: '/app/solicitudes/ver-estado-solicitud',              bg: '#EFF6FF', color: '#2563EB' },
         { icon: 'chat',             label: 'Chat',                 route: '/app/comunicacion/chat',                            bg: '#ECFDF5', color: '#16A34A' },

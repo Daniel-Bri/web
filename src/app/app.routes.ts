@@ -19,6 +19,7 @@ import { VerComisionesComponent } from './cotizacion-pagos/ver-comisiones/ver-co
 import { VerDetalleIncidenteComponent } from './solicitudes/ver-detalle-incidente/ver-detalle-incidente.component';
 import { AdjuntarFotosComponent } from './emergencias/adjuntar-fotos/adjuntar-fotos.component';
 import { EnviarAudioComponent } from './emergencias/enviar-audio/enviar-audio.component';
+import { ReportarEmergenciaComponent } from './emergencias/reportar-emergencia/reportar-emergencia.component';
 import { VerSolicitudesDisponiblesComponent } from './solicitudes/ver-solicitudes-disponibles/ver-solicitudes-disponibles.component';
 import { VerEstadoSolicitudComponent } from './solicitudes/ver-estado-solicitud/ver-estado-solicitud.component';
 import { AuditoriaComponent } from './reportes/auditoria/auditoria.component';
@@ -58,9 +59,9 @@ export const routes: Routes = [
       { path: 'acceso-registro/gestionar-vehiculos', component: DashboardHomeComponent,      canActivate: [roleGuard], data: { roles: ['cliente'] } },
 
       // ── Emergencias (CU05–CU09) ────────────────────────────
+      { path: 'emergencias/reportar-emergencia',     component: ReportarEmergenciaComponent, canActivate: [roleGuard], data: { roles: ['cliente'] } },
       { path: 'emergencias/adjuntar-fotos',          component: AdjuntarFotosComponent,      canActivate: [roleGuard], data: { roles: ['cliente'] } },
       { path: 'emergencias/enviar-audio',            component: EnviarAudioComponent,        canActivate: [roleGuard], data: { roles: ['cliente'] } },
-      { path: 'emergencias/reportar-emergencia',     component: DashboardHomeComponent,      canActivate: [roleGuard], data: { roles: ['cliente'] } },
       { path: 'emergencias/enviar-ubicacion',        component: DashboardHomeComponent,      canActivate: [roleGuard], data: { roles: ['cliente'] } },
 
       // ── Solicitudes ────────────────────────────────────────

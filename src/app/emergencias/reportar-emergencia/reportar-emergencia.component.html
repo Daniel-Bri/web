@@ -1,2 +1,87 @@
-<!-- CU05 - Reportar Emergencia -->
-<p>CU05 - Reportar Emergencia</p>
+<!-- CU05 – Reportar Emergencia -->
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Reportar Emergencia</h1>
+    <p class="page-sub">CU05 · Completa el formulario para solicitar asistencia vial</p>
+  </div>
+  <button class="btn-secondary" type="button" (click)="volver()">
+    <span class="material-symbols-outlined" style="font-size:16px;margin-right:4px">arrow_back</span>
+    Volver
+  </button>
+</div>
+
+<!-- Banner informativo -->
+<div style="background:#FEF2F2;border:1px solid #FCA5A5;border-radius:10px;padding:14px 16px;margin-bottom:1.5rem;display:flex;gap:10px;align-items:flex-start">
+  <span class="material-symbols-outlined" style="color:#EF4444;font-size:22px;flex-shrink:0">warning_amber</span>
+  <p style="margin:0;font-size:0.88rem;color:#991B1B;line-height:1.5">
+    Completa el formulario para solicitar asistencia. Al continuar podrás adjuntar fotos del problema.
+  </p>
+</div>
+
+@if (errorMsg) {
+  <div class="alert-danger">{{ errorMsg }}</div>
+}
+
+<div class="form-card">
+
+  @if (loadingVehiculos) {
+    <div class="loading-row"><span class="spinner-dark"></span> Cargando vehículos…</div>
+  } @else if (vehiculos.length === 0) {
+    <div class="empty-state">
+      <p>No tienes vehículos registrados.</p>
+      <a routerLink="/app/acceso-registro/gestionar-vehiculos" class="btn-primary">Registrar vehículo</a>
+    </div>
+  } @else {
+
+    <!-- Vehículo -->
+    <div style="margin-bottom:1.25rem">
+      <label style="display:block;font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:0.5rem">
+        Vehículo *
+      </label>
+      <select [(ngModel)]="vehiculoId" [disabled]="loading"
+              style="width:100%;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;font-size:0.9rem;background:#fff">
+        @for (v of vehiculos; track v.id) {
+          <option [value]="v.id">{{ v.marca }} {{ v.modelo }} — {{ v.placa }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Prioridad -->
+    <div style="margin-bottom:1.25rem">
+      <label style="display:block;font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:0.5rem">
+        Prioridad *
+      </label>
+      <select [(ngModel)]="prioridad" [disabled]="loading"
+              style="width:100%;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;font-size:0.9rem;background:#fff">
+        @for (p of prioridades; track p.value) {
+          <option [value]="p.value">{{ p.label }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Descripción -->
+    <div style="margin-bottom:1.5rem">
+      <label style="display:block;font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:0.5rem">
+        Descripción del problema <span style="color:#9CA3AF;font-weight:400">(opcional)</span>
+      </label>
+      <textarea [(ngModel)]="descripcion" [disabled]="loading"
+                rows="4" maxlength="1000"
+                placeholder="Describe brevemente el problema… IA clasifica automáticamente el tipo de falla."
+                style="width:100%;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;font-size:0.9rem;resize:vertical;font-family:inherit;box-sizing:border-box">
+      </textarea>
+      <p style="font-size:0.75rem;color:#9CA3AF;margin:4px 0 0;text-align:right">
+        {{ descripcion.length }}/1000
+      </p>
+    </div>
+
+    <button type="button" class="btn-primary" (click)="submit()" [disabled]="loading || !vehiculoId"
+            style="width:100%;padding:13px;font-size:0.95rem">
+      @if (loading) {
+        <span class="spinner-dark" style="margin-right:8px"></span> Creando incidente…
+      } @else {
+        <span class="material-symbols-outlined" style="font-size:18px;margin-right:6px;vertical-align:middle">send</span>
+        Reportar y adjuntar fotos
+      }
+    </button>
+  }
+</div>
